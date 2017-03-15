@@ -4,33 +4,45 @@
  var htmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports={
-    entry:{
-        'main':'./src/script/main.js',
-        'a':'./src/script/a.js',
-        'b':'./src/script/b.js',
-        'c':'./src/script/c.js'
-    },
+    entry:'./src/app.js',
     output:{
         path:'./dist',
-        filename:'js/[name]-[chunkhash].js',
-        publicPath:'http://www.sharp.com'
+        filename:'js/[name]-[chunkhash].js'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/,
+                use: [
+                    { loader: 'style-loader'},
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true
+                        }
+                    }
+                ]
+            },
+            {
+                test: /\.js$/,
+                use:[
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ["latest"]
+                        }
+                    },
+                ],
+                exclude:'./node_modules'
+            }
+        ]
     },
     plugins: [
         new htmlWebpackPlugin({
-            filename: 'a.html',
+            filename: 'index.html',
             template: 'index.html',
             title:'this is a title',    //一个title 属性
-            inject:'body',   //注入head/body/ture/false true为body false为不注入
-            date:new Date(),
-            chunks:['main','a']
-        }),
-        new htmlWebpackPlugin({
-            filename: 'b.html',
-            template: 'index.html',
-            title:'this is b title',    //一个title 属性
-            inject:'body',   //注入head/body/ture/false true为body false为不注入
-            date:new Date(),
-            chunks:['b','c']
+            inject:'body'
         })
     ]
 
