@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node_modules/.bin/webpack-dev-server",
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --config webpack.config.js --colors --display-reasons --display-error-details"
   },
@@ -25,6 +26,7 @@
     "sass-loader": "^6.0.3",
     "style-loader": "^0.14.1",
     "url-loader": "^0.5.8",
-    "webpack": "^1.14.0"
+    "webpack": "^1.14.0",
+    "webpack-dev-server": "^1.16.3"
   }
 }
